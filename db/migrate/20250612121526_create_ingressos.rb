@@ -4,6 +4,7 @@ class CreateIngressos < ActiveRecord::Migration[8.0]
       t.references :usuario, null: false, foreign_key: true
       t.references :sessao, null: false, foreign_key: true
       t.references :poltrona, null: false, foreign_key: true
+      t.references :area, null: false, foreign_key: true
       t.decimal :valor
 
       t.timestamps

@@ -13,13 +13,16 @@
     <header>
       <h1>🎭 Teatro ABC</h1>
       <nav>
-        <%= link_to "Início", root_path %> |
-        <%= link_to "Clientes", usuarios_path %> |
-        <%= link_to "Peças", pecas_path %> |
-        <%= link_to "Sessões", sessoes_path %> |
-        <%= link_to "Áreas", areas_path %> |
-        <%= link_to "Poltronas", poltronas_path %> |
-        <%= link_to "Ingressos", ingressos_path %>
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Estatísticas", estatistica_ingressos_path %></li>
+          <li><%= link_to "Clientes", usuarios_path %></li>
+          <li><%= link_to "Peças", pecas_path %></li>
+          <li><%= link_to "Sessões", sessoes_path %></li>
+          <li><%= link_to "Áreas", areas_path %></li>
+          <li><%= link_to "Poltronas", poltronas_path %></li>
+          <li><%= link_to "Ingressos", ingressos_path %></li>
+        </ul>
       </nav>
       <hr>
     </header>

@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_12_231857) do
-  create_table "areas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+ActiveRecord::Schema[8.0].define(version: 2025_06_13_180940) do
+  create_table "areas", charset: "utf8mb3", force: :cascade do |t|
     t.string "nome"
     t.decimal "preco", precision: 10
     t.integer "quantidade_poltronas"
@@ -19,29 +19,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_231857) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "clientes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "estatisticas", charset: "utf8mb3", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "estatiscas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "ingressos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "ingressos", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "usuario_id", null: false
     t.bigint "sessao_id", null: false
     t.bigint "poltrona_id", null: false
+    t.bigint "area_id", null: false
     t.decimal "valor", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_ingressos_on_area_id"
     t.index ["poltrona_id"], name: "index_ingressos_on_poltrona_id"
     t.index ["sessao_id"], name: "index_ingressos_on_sessao_id"
     t.index ["usuario_id"], name: "index_ingressos_on_usuario_id"
   end
 
-  create_table "pecas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "pecas", charset: "utf8mb3", force: :cascade do |t|
     t.string "titulo"
     t.text "descricao"
     t.string "classificacao"
@@ -50,7 +47,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_231857) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "poltronas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "poltronas", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "area_id", null: false
     t.string "numero"
     t.boolean "disponivel"
@@ -59,7 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_231857) do
     t.index ["area_id"], name: "index_poltronas_on_area_id"
   end
 
-  create_table "sessoes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "sessoes", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "peca_id", null: false
     t.integer "horario", default: 0
     t.datetime "created_at", null: false
@@ -67,13 +64,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_231857) do
     t.index ["peca_id"], name: "index_sessoes_on_peca_id"
   end
 
-  create_table "status_tests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "status_tests", charset: "utf8mb3", force: :cascade do |t|
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "usuarios", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "usuarios", charset: "utf8mb3", force: :cascade do |t|
     t.string "nome"
     t.string "cpf"
     t.string "telefone"
@@ -83,6 +80,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_231857) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "ingressos", "areas"
   add_foreign_key "ingressos", "poltronas"
   add_foreign_key "ingressos", "sessoes"
   add_foreign_key "ingressos", "usuarios"

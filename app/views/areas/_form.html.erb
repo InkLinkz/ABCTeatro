@@ -30,3 +30,20 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const areaSelect = document.getElementById("area_select");
+
+    areaSelect.addEventListener("change", function() {
+      fetch(`/areas/${areaSelect.value}/poltronas_disponiveis`)
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response data
+        })
+        .catch(error => {
+          console.error("Error fetching poltronas disponiveis:", error);
+        });
+    });
+  });
+</script>

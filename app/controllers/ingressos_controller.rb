@@ -1,6 +1,7 @@
 class IngressosController < ApplicationController
-  before_action :set_ingresso, only: %i[ show edit update destroy ]
-
+  before_action :set_ingresso, only: %i[show edit update destroy]
+  before_action :set_poltronas, only: %i[new edit show]
+  
   # GET /ingressos or /ingressos.json
   def index
     @ingressos = Ingresso.all
@@ -9,7 +10,7 @@ class IngressosController < ApplicationController
   # GET /ingressos/1 or /ingressos/1.json
   def show
   end
-
+ 
   # GET /ingressos/new
   def new
     @ingresso = Ingresso.new
@@ -68,11 +69,28 @@ class IngressosController < ApplicationController
     end
   end
 
+
+  def estatistica
+    @valor_hoje = EstatisticasService.new.valor_total_dia
+  end
+
   private
-    
-    def set_ingresso
-      @ingresso = Ingresso.find(params[:id])
+
+  def set_ingresso
+    @ingresso = Ingresso.find(params[:id])
+  end
+
+  def set_poltronas
+    if params[:area_id].present?
+      @selected_area = Area.includes(:poltronas).find_by(id: params[:area_id])
+      @poltronas = @selected_area&.poltronas&.map { |poltrona| [poltrona.numero, poltrona.id] } || []
+    elsif @ingresso&.area_id.present?
+      @selected_area = Area.includes(:poltronas).find_by(id: @ingresso.area_id)
+      @poltronas = @selected_area&.poltronas&.map { |poltrona| [poltrona.numero, poltrona.id] } || []
+    else
+      @poltronas = []
     end
+  end
 
    
     def ingresso_params

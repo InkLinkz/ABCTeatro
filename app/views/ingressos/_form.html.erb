@@ -1,10 +1,10 @@
-<%= form_with(model: ingresso) do |form| %>
-  <% if ingresso.errors.any? %>
+<%= form_with(model: @ingresso, local: true) do |form| %>
+  <% if @ingresso.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(ingresso.errors.count, "error") %> prohibited this ingresso from being saved:</h2>
+      <h2><%= pluralize(@ingresso.errors.count, "error") %> prohibited this ingresso from being saved:</h2>
 
       <ul>
-        <% ingresso.errors.each do |error| %>
+        <% @ingresso.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -12,23 +12,24 @@
   <% end %>
 
   <div>
-    <%= form.label :usuario_id, style: "display: block" %>
-    <%= form.text_field :usuario_id %>
+  <%= form.label :usuario_id, "Usuário" %>
+  <%= form.collection_select :usuario_id, Usuario.all, :id, :nome, prompt: "Selecione o usuário" %>  
   </div>
 
   <div>
-    <%= form.label :horario, "Sessão" %>
-    <%= form.select :horario, Sessao.horarios.keys.map { |h| [h.humanize, h] }, prompt: "Selecione o horário" %>
+  <% sessoes_unicas = Sessao.all.group_by(&:horario).map { |horario, sessoes| sessoes.first } %>
+  <%= form.label :sessao_id, "Sessão" %>
+  <%= form.collection_select :sessao_id, sessoes_unicas, :id, :horario, prompt: "Selecione o horário" %>
   </div>
 
   <div>
     <%= form.label :area_id, "Área" %>
-    <%= form.select :area_id, Area.all.map { |a| [a.nome, a.id] }, { prompt: "Selecione a área" }, { id: "area_select" } %>
+    <%= form.collection_select :area_id, Area.all, :id, :nome, { prompt: "Selecione uma área" }, { id: "area_select" } %>
   </div>
 
   <div>
     <%= form.label :poltrona_id, "Poltrona" %>
-    <%= form.select :poltrona_id, [], { prompt: "Selecione a poltrona" }, { id: "poltrona_select" } %>
+    <%= form.select :poltrona_id, @poltronas || [], { prompt: "Selecione uma poltrona" }, { id: "poltrona_select" } %>
   </div>
 
   <div>
@@ -42,7 +43,7 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Salvar" %>
   </div>
 <% end %>
 

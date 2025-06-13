@@ -50,21 +50,21 @@ Sessao.create!(array_sessoes)
 
 
 25.times do |i|
-  Poltrona.create!(numero: i + 1, area_id: 1)
+  Poltrona.create!(numero: i + 1, area_id: 1, disponivel: true)
 end
 
 100.times do |i|
-  Poltrona.create!(numero: i + 1, area_id: 2)
+  Poltrona.create!(numero: i + 1, area_id: 2, disponivel: true)
 end
     
 30.times do |i|
-  Poltrona.create!(numero: i + 1, area_id: 3)
+  Poltrona.create!(numero: i + 1, area_id: 3, disponivel: true)
 end
 
 50.times do |i|
-  Poltrona.create!(numero: i + 1, area_id: 4)
+  Poltrona.create!(numero: i + 1, area_id: 4, disponivel: true)
 end
 
 50.times do |i|
-  Poltrona.create!(numero: i + 1, area_id: 5)
+  Poltrona.create!(numero: i + 1, area_id: 5, disponivel: true)
 end
