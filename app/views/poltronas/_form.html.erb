@@ -1,0 +1,32 @@
+<%= form_with(model: poltrona) do |form| %>
+  <% if poltrona.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(poltrona.errors.count, "error") %> prohibited this poltrona from being saved:</h2>
+
+      <ul>
+        <% poltrona.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :area_id, style: "display: block" %>
+    <%= form.text_field :area_id %>
+  </div>
+
+  <div>
+    <%= form.label :numero, style: "display: block" %>
+    <%= form.text_field :numero %>
+  </div>
+
+  <div>
+    <%= form.label :disponivel, style: "display: block" %>
+    <%= form.checkbox :disponivel %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

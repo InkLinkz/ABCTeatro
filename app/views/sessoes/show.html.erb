@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @sessao %>
+
+<div>
+  <%= link_to "Edit this sessao", edit_sessao_path(@sessao) %> |
+  <%= link_to "Back to sessoes", sessoes_path %>
+
+  <%= button_to "Destroy this sessao", @sessao, method: :delete %>
+</div>

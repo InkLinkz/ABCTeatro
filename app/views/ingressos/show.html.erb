@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @ingresso %>
+
+<div>
+  <%= link_to "Edit this ingresso", edit_ingresso_path(@ingresso) %> |
+  <%= link_to "Back to ingressos", ingressos_path %>
+
+  <%= button_to "Destroy this ingresso", @ingresso, method: :delete %>
+</div>

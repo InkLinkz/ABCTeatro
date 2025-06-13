@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @poltrona %>
+
+<div>
+  <%= link_to "Edit this poltrona", edit_poltrona_path(@poltrona) %> |
+  <%= link_to "Back to poltronas", poltronas_path %>
+
+  <%= button_to "Destroy this poltrona", @poltrona, method: :delete %>
+</div>

@@ -1,0 +1,12 @@
+<% content_for :title, "Editing ingresso" %>
+
+<h1>Editing ingresso</h1>
+
+<%= render "form", ingresso: @ingresso %>
+
+<br>
+
+<div>
+  <%= link_to "Show this ingresso", @ingresso %> |
+  <%= link_to "Back to ingressos", ingressos_path %>
+</div>

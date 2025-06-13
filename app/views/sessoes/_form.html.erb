@@ -1,0 +1,29 @@
+<%= form_with(model: sessao) do |form| %>
+  <% if sessao.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(sessao.errors.count, "error") %> prohibited this sessao from being saved:</h2>
+
+      <ul>
+        <% sessao.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :peca_id, style: "display: block" %>
+    <%= form.text_field :peca_id %>
+  </div>
+
+  <div>
+    <%= form.label :horario, style: "display: block" %>
+    <%= form.select :horario, [["Manhã", :manha], ["Tarde", :tarde], ["Noite", :noite]], include_blank: true %>
+  </div>
+
+  
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

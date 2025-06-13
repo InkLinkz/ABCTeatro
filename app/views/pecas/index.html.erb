@@ -1,0 +1,29 @@
+<h1>Lista de Peças</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Descrição</th>
+      <th>Classificação</th>
+      <th>Duração</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pecas.each do |peca| %>
+      <tr>
+        <td><%= peca.titulo %></td>
+        <td><%= peca.descricao %></td>
+        <td><%= peca.classificacao %></td>
+        <td><%= peca.duracao %></td>
+        <td><%= link_to 'Mostrar', peca %></td>
+        <td><%= link_to 'Editar', edit_peca_path(peca) %></td>
+        <td><%= link_to 'Excluir', peca, method: :delete, data: { confirm: 'Tem certeza?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Nova Peça', new_peca_path %>

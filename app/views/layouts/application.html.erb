@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Teatro ABC</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <header>
+      <h1>🎭 Teatro ABC</h1>
+      <nav>
+        <%= link_to "Início", root_path %> |
+        <%= link_to "Clientes", usuarios_path %> |
+        <%= link_to "Peças", pecas_path %> |
+        <%= link_to "Sessões", sessoes_path %> |
+        <%= link_to "Áreas", areas_path %> |
+        <%= link_to "Poltronas", poltronas_path %> |
+        <%= link_to "Ingressos", ingressos_path %>
+      </nav>
+      <hr>
+    </header>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

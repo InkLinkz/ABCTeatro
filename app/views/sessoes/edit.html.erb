@@ -1,0 +1,13 @@
+<% content_for :title, "Editing sessao" %>
+
+<h1>Editing sessao</h1>
+
+<%= render "form", sessao: @sessao %>
+
+
+<br>
+
+<div>
+  <%= link_to "Show this sessao", @sessao %> |
+  <%= link_to "Back to sessoes", sessoes_path %>
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  usuario: one
+  sessao: one
+  poltrona: one
+  valor: 9.99
+
+two:
+  usuario: two
+  sessao: two
+  poltrona: two
+  valor: 9.99
