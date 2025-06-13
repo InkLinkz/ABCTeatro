@@ -8,6 +8,11 @@ class AreasController < ApplicationController
 
   # GET /areas/1 or /areas/1.json
   def show
+    @area = Area.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @area }
+    end
   end
 
   # GET /areas/new
@@ -57,13 +62,10 @@ class AreasController < ApplicationController
     end
   end
 
-    def poltronas_disponiveis
-      area = Area.find(params[:id])
-      sessao_id = params[:sessao_id]
-      ocupadas = Ingresso.where(area_id: area.id, sessao_id: sessao_id).pluck(:poltrona).map(&:to_i)
-      disponiveis = (1..area.capacidade).to_a - ocupadas
-      render json: disponiveis
-    end
+  def poltronas_disponiveis
+    poltronas = Poltrona.where(area_id: params[:id], disponivel: true)
+    render json: poltronas.select(:id, :numero)
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

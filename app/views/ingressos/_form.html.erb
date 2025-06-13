@@ -17,21 +17,58 @@
   </div>
 
   <div>
-    <%= form.label :sessao_id, style: "display: block" %>
-    <%= form.text_field :sessao_id %>
+    <%= form.label :horario, "Sessão" %>
+    <%= form.select :horario, Sessao.horarios.keys.map { |h| [h.humanize, h] }, prompt: "Selecione o horário" %>
   </div>
 
   <div>
-    <%= form.label :poltrona_id, style: "display: block" %>
-    <%= form.text_field :poltrona_id %>
+    <%= form.label :area_id, "Área" %>
+    <%= form.select :area_id, Area.all.map { |a| [a.nome, a.id] }, { prompt: "Selecione a área" }, { id: "area_select" } %>
   </div>
 
   <div>
-    <%= form.label :valor, style: "display: block" %>
-    <%= form.text_field :valor %>
+    <%= form.label :poltrona_id, "Poltrona" %>
+    <%= form.select :poltrona_id, [], { prompt: "Selecione a poltrona" }, { id: "poltrona_select" } %>
+  </div>
+
+  <div>
+    <%= form.label :valor, "Valor" %>
+    <%= form.text_field :valor, readonly: true, id: "valor_input" %>
+  </div>
+
+  <div>
+    <%= form.label :peca_id, "Peça" %>
+    <%= form.select :peca_id, Peca.all.map { |p| [p.titulo, p.id] }, prompt: "Selecione a peça" %>
   </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const areaSelect = document.getElementById("area_select");
+    const poltronaSelect = document.getElementById("poltrona_select");
+    const valorInput = document.getElementById("valor_input");
+
+    areaSelect.addEventListener("change", function() {
+      // Atualiza poltronas disponíveis
+      fetch(`/areas/${areaSelect.value}/poltronas_disponiveis`)
+        .then(response => response.json())
+        .then(data => {
+          poltronaSelect.innerHTML = '<option value="">Selecione a poltrona</option>';
+          data.forEach(function(poltrona) {
+            poltronaSelect.innerHTML += `<option value="${poltrona.id}">${poltrona.numero}</option>`;
+          });
+        });
+
+      // Atualiza valor do ingresso
+      fetch(`/areas/${areaSelect.value}.json`)
+        .then(response => response.json())
+        .then(data => {
+          valorInput.value = data.preco;
+        });
+    });
+  });
+</script>

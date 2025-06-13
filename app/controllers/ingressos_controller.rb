@@ -22,6 +22,7 @@ class IngressosController < ApplicationController
   # POST /ingressos or /ingressos.json
   def create
     @ingresso = Ingresso.new(ingresso_params)
+    @ingresso.valor = Area.find(@ingresso.area_id).preco if @ingresso.area_id.present?
 
     respond_to do |format|
       if @ingresso.save
@@ -75,6 +76,6 @@ class IngressosController < ApplicationController
 
    
     def ingresso_params
-      params.require(:ingresso).permit(:usuario_id, :sessao_id, :area_id, :poltrona)
+      params.require(:ingresso).permit(:usuario_id, :sessao_id, :area_id, :poltrona_id)
     end
 end
