@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :clientes
   root "pecas#index"
 
-  resources :usuarios, path: 'clientes'
+  resources :usuarios
   resources :pecas, path: "pecas"
   resources :sessoes, path: "sessoes"
   resources :poltronas, path: "poltronas"

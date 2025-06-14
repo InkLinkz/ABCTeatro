@@ -1,70 +1,53 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: %i[ show edit update destroy ]
 
-  # GET /usuarios or /usuarios.json
   def index
     @usuarios = Usuario.all
   end
 
-  # GET /usuarios/1 or /usuarios/1.json
-  def show
-  end
+  def show; end
 
-  # GET /usuarios/new
   def new
     @usuario = Usuario.new
   end
 
-  # GET /usuarios/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /usuarios or /usuarios.json
   def create
     @usuario = Usuario.new(usuario_params)
-
-    respond_to do |format|
-      if @usuario.save
-        format.html { redirect_to @usuario, notice: "Usuario was successfully created." }
-        format.json { render :show, status: :created, location: @usuario }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
-      end
-    end
+    save_and_respond(@usuario, :new)
   end
 
-  # PATCH/PUT /usuarios/1 or /usuarios/1.json
   def update
-    respond_to do |format|
-      if @usuario.update(usuario_params)
-        format.html { redirect_to @usuario, notice: "Usuario was successfully updated." }
-        format.json { render :show, status: :ok, location: @usuario }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @usuario.errors, status: :unprocessable_entity }
-      end
-    end
+    @usuario.assign_attributes(usuario_params)
+    save_and_respond(@usuario, :edit)
   end
 
-  # DELETE /usuarios/1 or /usuarios/1.json
   def destroy
     @usuario.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to usuarios_path, status: :see_other, notice: "Usuario was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to usuarios_path, notice: "Usuário excluído com sucesso.", status: :see_other
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_usuario
-      @usuario = Usuario.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def usuario_params
-      params.expect(usuario: [ :nome, :cpf, :telefone, :endereco, :data_nascimento ])
+  def set_usuario
+    @usuario = Usuario.find(params[:id])
+  end
+
+  def usuario_params
+    params.require(:usuario).permit(:nome, :cpf, :telefone, :endereco, :data_nascimento)
+  end
+
+  # 🧩 Aqui está o padrão extraído (reutilizável)
+  def save_and_respond(resource, render_view)
+    respond_to do |format|
+      if resource.save
+        format.html { redirect_to resource, notice: "Usuário salvo com sucesso." }
+        format.json { render :show, status: :ok, location: resource }
+      else
+        format.html { render render_view, status: :unprocessable_entity }
+        format.json { render json: resource.errors, status: :unprocessable_entity }
+      end
     end
+  end
 end

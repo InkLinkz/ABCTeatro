@@ -19,7 +19,8 @@
   <div>
   <% sessoes_unicas = Sessao.all.group_by(&:horario).map { |horario, sessoes| sessoes.first } %>
   <%= form.label :sessao_id, "Sessão" %>
-  <%= form.collection_select :sessao_id, sessoes_unicas, :id, :horario, prompt: "Selecione o horário" %>
+  <%= form.collection_select :sessao_id, Sessao.includes(:peca).all, :id, 
+        lambda { |s| "#{s.peca.titulo} - #{s.horario}" }, prompt: "Selecione a sessão" %>
   </div>
 
   <div>

@@ -94,3 +94,123 @@ textarea:focus {
   outline: none;
   box-shadow: 0 0 4px rgba(0,123,255,0.25);
 }
+
+/* Menu lateral bonito */
+nav {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #343a40;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+nav a {
+  display: block;
+  color: #f8f9fa;
+  text-decoration: none;
+  margin-bottom: 10px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ffc107;
+}
+
+/* Centraliza o conteúdo do lado direito */
+.main-content {
+  margin-left: 220px;
+  padding: 40px 20px;
+}
+
+/* Título estilizado */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 10px;
+}
+
+/* Tabela mais bonita */
+table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Links de ação */
+.action-links a {
+  margin-right: 10px;
+  color: #007bff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.action-links a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Link de nova peça */
+a.novo-link {
+  display: inline-block;
+  margin-top: 10px;
+  color: #28a745;
+  font-weight: 600;
+}
+
+a.novo-link:hover {
+  color: #218838;
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  nav {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+/* Links de ação dentro da tabela */
+td.action-link a {
+  color: #007bff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+td.action-link a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Link Nova Peça */
+a.novo-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #28a745;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a.novo-link:hover {
+  color: #218838;
+}
+}
+
+

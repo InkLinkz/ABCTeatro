@@ -71,7 +71,11 @@ class IngressosController < ApplicationController
 
 
   def estatistica
-    @valor_hoje = EstatisticasService.new.valor_total_dia
+    service = EstatisticasService.new
+    @valor_hoje = service.valor_total_dia
+    @sessao_mais_vista = service.sessao_mais_vista
+    @peca_mais_vista = service.peca_mais_vista
+    @area_mais_utilizada = service.area_mais_utilizada
   end
 
   private
